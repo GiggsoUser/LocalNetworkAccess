@@ -4,6 +4,10 @@ from selenium.webdriver import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+import logging
+# Set up logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 
 class Lna:
@@ -24,7 +28,7 @@ class Lna:
     proceed_xpath = "//*[@id='proceed-link']"
     context_xpath = "//*[@id='app']/main/div[1]/div[2]/div/div/div/div"
     menu_xpath = "//*[@id='app']/main/div[1]/div[2]/div/div/div[1]/button"
-
+    login_button_xpath = "//*[@id='app']/div[1]/div[1]/div/div/form/button"
 
     def __init__(self):
         self.driver = None
@@ -40,6 +44,13 @@ class Lna:
         self.driver.find_element(By.XPATH, self.proceed_xpath).click()
         self.driver.implicitly_wait(5)
 
+    def verify_login_page_loads(self):
+        current_url = self.driver.current_url
+        print("Current URL:", current_url)
+        if 'login' in current_url:
+            print("Login page is loaded")
+        else:
+            print("Login page is not loaded")
     def login(self):
         self.driver.find_element(By.XPATH, self.username_xpath).click()
         self.driver.find_element(By.XPATH, self.username_xpath).send_keys("admin")
