@@ -61,6 +61,14 @@ class Lna:
         self.driver.implicitly_wait(2)
         self.driver.find_element(By.XPATH, self.submit_button_xpath).click()
 
+    def verify_update_pwd(self):
+        current_url = self.driver.current_url
+        print("Current URL:", current_url)
+        if 'passwordChange' in current_url:
+            print("passwordChange page is loaded")
+        else:
+            print("passwordChange page is not loaded")
+
     def update_pwd(self):
         self.driver.find_element(By.XPATH, self.new_password_xpath).click()
         self.driver.find_element(By.XPATH, self.new_password_xpath).send_keys("Network@123")
@@ -80,16 +88,14 @@ class Lna:
         self.driver.implicitly_wait(2)
 
     def verify_menu(self):
-        try:
-            menu_element = WebDriverWait(self.driver, 10).until(
-                EC.visibility_of_element_located((By.XPATH, self.menu_xpath))
-            )
-            print("Page opened successfully.")
-            # Additional actions if the menu item is found
-            # For example, you can assert certain conditions to verify the correctness of the page
-            assert "Expected Menu Item Text" in menu_element.text
-        except:
-            print("Page may not have loaded correctly or menu item not found.")
+        current_url = self.driver.current_url
+        print("Current URL:", current_url)
+        if 'update' in current_url:
+            print("update menu is loaded")
+        else:
+            print("update menu is not loaded")
+
+
     def firmware_updates(self):
         self.driver.find_element(By.XPATH, self.updates_menu_xpath).click()
         self.driver.implicitly_wait(4)

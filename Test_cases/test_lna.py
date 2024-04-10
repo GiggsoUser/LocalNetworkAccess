@@ -25,6 +25,8 @@ class TestLna:
         co.login()
         logger.info("Login successful")
         time.sleep(5)
+        co.verify_update_pwd()
+        time.sleep(2)
         co.update_pwd()
         time.sleep(5)
         logger.info("Password updated successfully")
