@@ -31,6 +31,8 @@ class TestLna:
         time.sleep(5)
         logger.info("Password updated successfully")
         logger.info("Setup completed successfully")
+        co.setup_form()
+        time.sleep(2)
         co.firmware_updates()
         time.sleep(3)
         logger.info("Navigated to firmware updates section")

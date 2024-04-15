@@ -29,6 +29,13 @@ class Lna:
     context_xpath = "//*[@id='app']/main/div[1]/div[2]/div/div/div/div"
     menu_xpath = "//*[@id='app']/main/div[1]/div[2]/div/div/div[1]/button"
     login_button_xpath = "//*[@id='app']/div[1]/div[1]/div/div/form/button"
+    system_menu_xpath = "//*[@id='app']/main/div[1]/div[1]/div[1]/div[2]/div/a[8]/div[2]"
+    regional_settings_menu_xpath = "//*[@id='app']/main/div[1]/div[2]/div/div/div[3]/div/button/div/div[1]/p"
+    country_menu_xpath = "//*[@id='app']/main/div[1]/div[2]/div/div/div[3]/div/div/div/div[1]/div/div[2]/div[1]/div[2]"
+    country_search_xpath = "//*[@id='app']/main/div[1]/div[2]/div/div/div[3]/div/div/div/div[1]/div/div[2]/div[3]/div/div[1]/div/input"
+    country_select_xpath = "//*[@id='app']/main/div[1]/div[2]/div/div/div[3]/div/div/div/div[1]/div/div[2]/div[3]/div/div[2]/div[2]"
+    timezone_xpath = "//*[@id='app']/main/div[1]/div[2]/div/div[1]/div[3]/div/div/div/div[1]/div/div[3]/div[1]"
+    select_timezone_xpath = "//*[@id='app']/main/div[1]/div[2]/div/div[1]/div[3]/div/div/div/div[1]/div/div[3]/div[3]/div/div/div/div/div/p[1]"
 
     def __init__(self):
         self.driver = None
@@ -94,6 +101,25 @@ class Lna:
             print("update menu is loaded")
         else:
             print("update menu is not loaded")
+
+    def setup_form(self):
+        self.driver.find_element(By.XPATH, self.system_menu_xpath).click()
+        self.driver.implicitly_wait(2)
+        self.driver.find_element(By.XPATH, self.regional_settings_menu_xpath).click()
+        self.driver.implicitly_wait(2)
+        self.driver.find_element(By.XPATH, self.country_menu_xpath).click()
+        self.driver.implicitly_wait(3)
+        self.driver.find_element(By.XPATH,self.country_search_xpath).click()
+        self.driver.implicitly_wait(2)
+        self.driver.find_element(By.XPATH, self.country_search_xpath).send_keys("India")
+        self.driver.implicitly_wait(2)
+        self.driver.find_element(By.XPATH,self.country_select_xpath).click()
+        self.driver.implicitly_wait(2)
+        self.driver.find_element(By.XPATH,self.timezone_xpath).click()
+        self.driver.implicitly_wait(2)
+        self.driver.find_element(By.XPATH,self.select_timezone_xpath).click()
+        self.driver.implicitly_wait(2)
+
 
 
     def firmware_updates(self):
